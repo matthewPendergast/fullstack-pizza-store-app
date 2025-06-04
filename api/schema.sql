@@ -24,9 +24,12 @@ CREATE TABLE menu_items (
 
 CREATE TABLE cart_items (
     id SERIAL PRIMARY KEY,
+    cart_id UUID,
     user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
     menu_item_id INTEGER REFERENCES menu_items(id) ON DELETE CASCADE,
     quantity INTEGER NOT NULL CHECK (quantity > 0),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE (cart_id, menu_item_id),
     UNIQUE (user_id, menu_item_id)
 );
 

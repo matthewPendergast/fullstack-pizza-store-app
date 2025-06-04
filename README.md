@@ -17,7 +17,7 @@ A full-stack pizza ordering web app being built with React, Node, Express, and P
 -   Mock checkout with fake order confirmation page
 -   User signup/login functionality
 -   Backend stores order info for guests or logged-in users
--   Clean, responsive UI inspired by real-world applications
+-   Responsive UI inspired by real-world applications
 
 ## Roadmap
 
@@ -26,7 +26,7 @@ A full-stack pizza ordering web app being built with React, Node, Express, and P
 -   Backend
     -   ✅ Design database schema and populate with initial seed data
     -   ✅ Menu route
-    -   ⬜ Cart route
+    -   ✅ Cart route
     -   ⬜ User auth routes
     -   ⬜ Order/checkout routes
     -   ⬜ Dockerized local development setup
@@ -51,17 +51,131 @@ A full-stack pizza ordering web app being built with React, Node, Express, and P
 ### Folder Structure
 
 ```
-api/src/
-├── config/
-├── controllers/
-├── middlewares/
-├── models/
-├── routes/
-└── index.ts
+api/
+├── .env
+├── Dockerfile
+├── schema.sql
+├── seed.sql
+├── src/
+│   ├── config/
+│   ├── controllers/
+│   ├── middlewares/
+│   ├── models/
+│   ├── routes/
+│   └── index.ts
 ```
 
 ### Routes
 
-- **GET** `/menu`
+**Menu** `/menu`
+
+- **GET** `/`
 
 	Returns a list of all available menu items.
+
+	Response:
+
+	```json
+	[
+		{
+			"id": 1,
+			"name": "Margherita",
+			"description": "Classic cheese and tomato pizza.",
+			"price": "10.99",
+			"category": "Pizza",
+			"created_at": "2025-06-04T18:55:00.000Z"
+		},
+		...
+	]
+	```
+
+**Cart** `/cart`
+
+- **POST** `/`
+
+	Adds an item to the cart. If the item already exists, it increases the quantity.
+
+	Request:
+
+	```json
+	{
+		"cartId": "123e4567-e89b-12d3-a456-426614174000",
+		"menuItemId": 1,
+		"quantity": 2
+	}
+	```
+
+	Response:
+	```json
+	{
+  		"message": "Item added to cart"
+	}
+	```
+
+- **GET** `/:cartId`
+
+	Retrieves all items in the specified cart.
+
+	Path Parameter:
+
+	- cartId (UUID)
+
+	Response:
+
+	```json
+	[
+		{
+			"id": 1,
+			"cart_id": "123e4567-e89b-12d3-a456-426614174000",
+			"menu_item_id": 1,
+			"quantity": 2,
+			"created_at": "2025-06-04T19:00:00.000Z",
+			"item_name": "Margherita",
+			"item_price": "10.99",
+			"item_category": "Pizza"
+		},
+		...
+	]
+	```
+
+- **POST** `/:cartId/item/:menuItemId`
+
+	Updates the quantity of the specified item in the cart.
+
+	Path Parameters:
+
+	- cartId (UUID)
+	- menuItemId (integer)
+
+	Request:
+
+	```json
+	{
+		"quantity": 5
+	}
+	```
+
+	Response:
+
+	```json
+	{
+  		"message": "Cart item updated."
+	}
+	```
+
+- **DELETE** `/:cartId/item/:menuItemId`
+
+	Removes the specified item from the cart.
+
+	Path Parameters:
+
+	- cartId (UUID)
+	- menuItemId (integer)
+
+	Response:
+
+	```json
+	{
+		"message": "Cart item removed."
+	}
+	```
