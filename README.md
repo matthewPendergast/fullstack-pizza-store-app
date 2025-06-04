@@ -27,7 +27,7 @@ A full-stack pizza ordering web app being built with React, Node, Express, and P
     -   ✅ Design database schema and populate with initial seed data
     -   ✅ Menu route
     -   ✅ Cart routes
-    -   ⬜ User auth routes
+    -   ✅ User auth routes
     -   ⬜ Order/checkout routes
     -   ⬜ Dockerized local development setup
     -   ⬜ Basic Jest tests for API endpoints
@@ -175,5 +175,62 @@ api/
 	```json
 	{
 		"message": "Cart item removed."
+	}
+	```
+
+**Auth** `/auth`
+
+- **POST** `/signup`
+
+	Creates a new user account.
+
+	Request:
+
+	```json
+	{
+		"name": "Jane Doe",
+		"email": "jane@example.com",
+		"password": "securePassword123"
+	}
+	```
+
+	Response:
+
+	```json
+	{
+		"message": "User created successfully.",
+		"user": {
+			"id": 1,
+			"name": "Jane Doe",
+			"email": "jane@example.com",
+			"created_at": "2025-06-04T20:00:00.000Z"
+		}
+	}
+	```
+
+- **POST** `/login`
+
+	Logs in an existing user and returns a JWT token.
+
+	Request:
+
+	```json
+		{
+			"email": "jane@example.com",
+			"password": "securePassword123"
+		}
+	```
+
+	Response:
+
+	```json
+	{
+		"message": "Login successful.",
+		"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+		"user": {
+			"id": 1,
+			"name": "Jane Doe",
+			"email": "jane@example.com"
+		}
 	}
 	```
