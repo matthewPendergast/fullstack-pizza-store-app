@@ -1,0 +1,16 @@
+{
+  "name": "fullstack-pizza-store-app",
+  "version": "1.0.0",
+  "description": "A full-stack pizza ordering web app being built with React, Node, Express, and PostgreSQL.",
+  "main": "index.js",
+  "scripts": {
+	"format": "prettier --write \"./**/*.{js,ts,tsx,json,md}\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "prettier": "^3.5.3"
+  }
+}
