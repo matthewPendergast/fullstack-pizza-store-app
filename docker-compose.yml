@@ -1,27 +1,25 @@
-version: '3.8'
-
 services:
-  api:
-    build: ./api
-    ports:
-      - "${API_PORT}:5000"
-    volumes:
-      - ./api:/app
-      - /app/node_modules
-    env_file:
-      - .env
-    depends_on:
-      - db
+    api:
+        build: ./api
+        ports:
+            - "${API_PORT}:5000"
+        volumes:
+            - ./api:/app
+            - /app/node_modules
+        env_file:
+            - .env
+        depends_on:
+            - db
 
-  db:
-    image: postgres:15
-    restart: always
-    ports:
-      - "${DB_PORT}:5432"
-    env_file:
-      - .env
-    volumes:
-      - pgdata:/var/lib/postgresql/data
+    db:
+        image: postgres:15
+        restart: always
+        ports:
+            - "${DB_PORT}:5432"
+        env_file:
+            - .env
+        volumes:
+            - pgdata:/var/lib/postgresql/data
 
 volumes:
-  pgdata:
+    pgdata:

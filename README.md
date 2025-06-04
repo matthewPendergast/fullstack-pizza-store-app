@@ -24,7 +24,8 @@ A full-stack pizza ordering web app being built with React, Node, Express, and P
 ### MVP
 
 -   Backend
-    -   ⬜ Pizza menu route
+    -   ✅ Design database schema and populate with initial seed data
+    -   ⬜ Menu route
     -   ⬜ Cart route
     -   ⬜ User auth routes
     -   ⬜ Order/checkout routes
