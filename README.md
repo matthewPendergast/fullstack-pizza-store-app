@@ -26,7 +26,7 @@ A full-stack pizza ordering web app being built with React, Node, Express, and P
 -   Backend
     -   ✅ Design database schema and populate with initial seed data
     -   ✅ Menu route
-    -   ✅ Cart route
+    -   ✅ Cart routes
     -   ⬜ User auth routes
     -   ⬜ Order/checkout routes
     -   ⬜ Dockerized local development setup
@@ -56,13 +56,13 @@ api/
 ├── Dockerfile
 ├── schema.sql
 ├── seed.sql
-├── src/
-│   ├── config/
-│   ├── controllers/
-│   ├── middlewares/
-│   ├── models/
-│   ├── routes/
-│   └── index.ts
+└── src/
+	├── config/
+	├── controllers/
+	├── middlewares/
+	├── models/
+	├── routes/
+	└── index.ts
 ```
 
 ### Routes
@@ -84,8 +84,7 @@ api/
 			"price": "10.99",
 			"category": "Pizza",
 			"created_at": "2025-06-04T18:55:00.000Z"
-		},
-		...
+		}
 	]
 	```
 
@@ -133,8 +132,7 @@ api/
 			"item_name": "Margherita",
 			"item_price": "10.99",
 			"item_category": "Pizza"
-		},
-		...
+		}
 	]
 	```
 
