@@ -25,7 +25,7 @@ A full-stack pizza ordering web app being built with React, Node, Express, and P
 
 -   Backend
     -   ✅ Design database schema and populate with initial seed data
-    -   ⬜ Menu route
+    -   ✅ Menu route
     -   ⬜ Cart route
     -   ⬜ User auth routes
     -   ⬜ Order/checkout routes
@@ -45,3 +45,23 @@ A full-stack pizza ordering web app being built with React, Node, Express, and P
 -   UI/UX polish
 -   Improved error handling
 -   Expanded menu options
+
+## API Documentation
+
+### Folder Structure
+
+```
+api/src/
+├── config/
+├── controllers/
+├── middlewares/
+├── models/
+├── routes/
+└── index.ts
+```
+
+### Routes
+
+- **GET** `/menu`
+
+	Returns a list of all available menu items.
