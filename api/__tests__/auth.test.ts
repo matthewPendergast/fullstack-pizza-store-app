@@ -47,7 +47,19 @@ describe("POST /auth/signup", () => {
 		});
 
 		expect(res.statusCode).toBe(400);
-		expect(res.body).toHaveProperty("error");
+		expect(Array.isArray(res.body.errors)).toBe(true);
+		expect(res.body.errors.length).toBeGreaterThan(0);
+	});
+
+	it("should return 400 for invalid signup input", async () => {
+		const res = await request(app).post("/auth/signup").send({
+			name: "",
+			email: "invalid-email",
+			password: "123",
+		});
+		expect(res.statusCode).toBe(400);
+		expect(Array.isArray(res.body.errors)).toBe(true);
+		expect(res.body.errors.length).toBeGreaterThan(0);
 	});
 });
 
@@ -98,6 +110,7 @@ describe("POST /auth/login", () => {
 		});
 
 		expect(res.statusCode).toBe(400);
-		expect(res.body).toHaveProperty("error");
+		expect(Array.isArray(res.body.errors)).toBe(true);
+		expect(res.body.errors.length).toBeGreaterThan(0);
 	});
 });

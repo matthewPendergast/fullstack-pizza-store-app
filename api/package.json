@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "nodemon src/index.ts",
     "test": "cross-env NODE_ENV=test dotenv -e .env.test -- jest",
-	"test:docker": "docker exec -it fullstack-pizza-store-app-api-1 npm test"
+    "test:docker": "docker exec -it fullstack-pizza-store-app-api-1 npm test"
   },
   "keywords": [],
   "author": "",
@@ -34,6 +34,9 @@
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
+    "express-rate-limit": "^7.5.0",
+    "express-validator": "^7.2.1",
+    "helmet": "^8.1.0",
     "jsonwebtoken": "^9.0.2",
     "pg": "^8.16.0"
   }

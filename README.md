@@ -33,10 +33,10 @@ A full-stack pizza ordering web app being built with React, Node, Express, and P
     -   ✅ Dockerized local development setup
     -   ✅ API integration tests with Jest + Supertest
 - Security & Middleware
-	-   ⬜ Helmet for secure headers
-	-   ⬜ Rate limiting on sensitive routes
-	-   ⬜ Input validation/sanitization middleware
-	-   ⬜ CORS configuration
+	-   ✅ Helmet for secure headers
+	-   ✅ Rate limiting on sensitive routes
+	-   ✅ CORS configuration
+	-   ✅ Input validation/sanitization middleware
 -   Frontend
     -   ⬜ Menu page
     -   ⬜ Signup page
