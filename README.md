@@ -31,7 +31,7 @@ A full-stack pizza ordering web app being built with React, Node, Express, and P
     -   ✅ Checkout/order routes (POST, GET)
 	-	✅ Health check route
     -   ✅ Dockerized local development setup
-    -   ⬜ Basic Jest tests (menu, cart, auth)
+    -   ✅ API integration tests with Jest + Supertest
 - Security & Middleware
 	-   ⬜ Helmet for secure headers
 	-   ⬜ Rate limiting on sensitive routes

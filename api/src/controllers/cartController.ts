@@ -27,7 +27,7 @@ export const addCartItem = async (req: Request, res: Response): Promise<void> =>
 
 	try {
 		await addToCart(cartId, menuItemId, quantity);
-		res.status(400).json({ message: "Item added to cart." });
+		res.status(201).json({ message: "Item added to cart." });
 	} catch (err) {
 		console.error("Error adding to cart:", err);
 		res.status(500).json({ error: "Internal server error." });
