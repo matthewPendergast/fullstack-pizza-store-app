@@ -1,0 +1,18 @@
+# Node junk
+node_modules
+dist
+build
+.env
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Logs
+npm-debug.log
+yarn-error.log
+
+# Editor junk
+.vscode
+.idea
+*.swp

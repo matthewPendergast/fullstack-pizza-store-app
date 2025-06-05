@@ -7,6 +7,16 @@ import orderRoutes from "./orderRoutes";
 
 const router = Router();
 
+// Health check route
+router.get("/health", (req, res) => {
+	res.status(200).json({
+		status: "ok",
+		timestamp: new Date().toISOString(),
+		uptime: process.uptime(),
+	});
+});
+
+// API routes
 router.use("/menu", menuRoutes);
 router.use("/cart", cartRoutes);
 router.use("/auth", authRoutes);

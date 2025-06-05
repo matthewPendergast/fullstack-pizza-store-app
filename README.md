@@ -29,8 +29,8 @@ A full-stack pizza ordering web app being built with React, Node, Express, and P
     -   ✅ Cart routes (GET, POST, PUT, DELETE)
     -   ✅ User auth routes (signup, login with JWT)
     -   ✅ Checkout/order routes (POST, GET)
-	-	⬜ Health check route
-    -   ⬜ Dockerized local development setup
+	-	✅ Health check route
+    -   ✅ Dockerized local development setup
     -   ⬜ Basic Jest tests (menu, cart, auth)
 - Security & Middleware
 	-   ⬜ Helmet for secure headers
@@ -49,15 +49,13 @@ A full-stack pizza ordering web app being built with React, Node, Express, and P
 
 ## API Documentation
 
-### Routes
+### Menu
 
-**Menu** `/menu`
-
-- **GET** `/`
+- **GET** `/menu`
 
 	Returns a list of all available menu items.
 
-	Response:
+	**Response:**
 
 	```json
 	[
@@ -68,17 +66,25 @@ A full-stack pizza ordering web app being built with React, Node, Express, and P
 			"price": "10.99",
 			"category": "Pizza",
 			"created_at": "2025-06-04T18:55:00.000Z"
+		},
+		{
+			"id":2,
+			"name":"Pepperoni",
+			"description":"Spicy pepperoni with mozzarella on tomato base.",
+			"price":"11.49",
+			"category":"pizza",
+			"created_at":"2025-06-05T16:38:44.793Z"
 		}
 	]
 	```
 
-**Cart** `/cart`
+### Cart
 
-- **POST** `/`
+- **POST** `/cart`
 
 	Adds an item to the cart. If the item already exists, it increases the quantity.
 
-	Request:
+	**Request:**
 
 	```json
 	{
@@ -88,22 +94,22 @@ A full-stack pizza ordering web app being built with React, Node, Express, and P
 	}
 	```
 
-	Response:
+	**Response:**
 	```json
 	{
   		"message": "Item added to cart"
 	}
 	```
 
-- **GET** `/:cartId`
+- **GET** `/cart/:cartId`
 
 	Retrieves all items in the specified cart.
 
-	Path Parameter:
+	**Path Parameter:**
 
-	- cartId (UUID)
+	- cartId: UUID
 
-	Response:
+	**Response**:
 
 	```json
 	[
@@ -121,16 +127,16 @@ A full-stack pizza ordering web app being built with React, Node, Express, and P
 	]
 	```
 
-- **PUT** `/:cartId/item/:menuItemId`
+- **PUT** `/cart/:cartId/item/:menuItemId`
 
 	Updates the quantity of the specified item in the cart.
 
-	Path Parameters:
+	**Path Parameters:**
 
-	- cartId (UUID)
-	- menuItemId (integer)
+	- cartId: UUID
+	- menuItemId: integer
 
-	Request:
+	**Request:**
 
 	```json
 	{
@@ -138,7 +144,7 @@ A full-stack pizza ordering web app being built with React, Node, Express, and P
 	}
 	```
 
-	Response:
+	**Response:**
 
 	```json
 	{
@@ -146,16 +152,16 @@ A full-stack pizza ordering web app being built with React, Node, Express, and P
 	}
 	```
 
-- **DELETE** `/:cartId/item/:menuItemId`
+- **DELETE** `/cart/:cartId/item/:menuItemId`
 
 	Removes the specified item from the cart.
 
-	Path Parameters:
+	**Path Parameters:**
 
-	- cartId (UUID)
-	- menuItemId (integer)
+	- cartId: UUID
+	- menuItemId: integer
 
-	Response:
+	**Response:**
 
 	```json
 	{
@@ -163,13 +169,13 @@ A full-stack pizza ordering web app being built with React, Node, Express, and P
 	}
 	```
 
-**Auth** `/auth`
+### Auth
 
-- **POST** `/signup`
+- **POST** `/auth/signup`
 
 	Creates a new user account.
 
-	Request:
+	**Request:**
 
 	```json
 	{
@@ -179,7 +185,7 @@ A full-stack pizza ordering web app being built with React, Node, Express, and P
 	}
 	```
 
-	Response:
+	**Response:**
 
 	```json
 	{
@@ -193,20 +199,20 @@ A full-stack pizza ordering web app being built with React, Node, Express, and P
 	}
 	```
 
-- **POST** `/login`
+- **POST** `/auth/login`
 
 	Logs in an existing user and returns a JWT token.
 
-	Request:
+	**Request:**
 
 	```json
-		{
-			"email": "jane@example.com",
-			"password": "securePassword123"
-		}
+	{
+		"email": "jane@example.com",
+		"password": "securePassword123"
+	}
 	```
 
-	Response:
+	**Response:**
 
 	```json
 	{
@@ -220,63 +226,62 @@ A full-stack pizza ordering web app being built with React, Node, Express, and P
 	}
 	```
 
-**Checkout** `/checkout`
+### Checkout
 
-- **POST** `/`
+- **POST** `/checkout`
 
 	Creates a new order for an authenticated user using the specified cart.
 
-	Headers:
+	**Header:**
 
 	- Authorization: Bearer <JWT\>
 
-	Request:
+	**Request:**
 
 	```json
-		{
-			"cartId": "123e4567-e89b-12d3-a456-426614174000"
-		}
+	{
+		"cartId": "123e4567-e89b-12d3-a456-426614174000"
+	}
 	```
 
-	Response:
+	**Response:**
 
 	```json
-		{
-			"message": "Order 123 placed successfully."
-		}
+	{
+		"message": "Order 123 placed successfully."
+	}
 	```
 
-**Orders** `/orders`
+### Orders
 
-- **GET** `/`
+- **GET** `/orders`
 
 	Retrieves order history for authenticated user.
 
-	Headers:
+	**Header:**
 
 	- Authorization: Bearer <JWT\>
 
-	Response:
+	**Response:**
 
 	```json
-		[
-			{
-				"id": 1,
-				"total_price": "29.97",
-				"created_at": "2025-06-05T15:30:00.000Z",
-				"items": [
-					{
-						"menu_item_id": 1,
-						"quantity": 2,
-						"price": "10.99"
-					},
-					{
-						"menu_item_id": 3,
-						"quantity": 1,
-						"price": "7.99"
-					}
-				]
-			}
-		]
-
+	[
+		{
+			"id": 1,
+			"total_price": "29.97",
+			"created_at": "2025-06-05T15:30:00.000Z",
+			"items": [
+				{
+					"menu_item_id": 1,
+					"quantity": 2,
+					"price": "10.99"
+				},
+				{
+					"menu_item_id": 3,
+					"quantity": 1,
+					"price": "7.99"
+				}
+			]
+		}
+	]
 	```
