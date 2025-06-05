@@ -25,12 +25,18 @@ A full-stack pizza ordering web app being built with React, Node, Express, and P
 
 -   Backend
     -   ✅ Design database schema and populate with initial seed data
-    -   ✅ Menu route
-    -   ✅ Cart routes
-    -   ✅ User auth routes
-    -   ⬜ Order/checkout routes
+    -   ✅ Menu route (GET)
+    -   ✅ Cart routes (GET, POST, PUT, DELETE)
+    -   ✅ User auth routes (signup, login with JWT)
+    -   ✅ Checkout/order routes (POST, GET)
+	-	⬜ Health check route
     -   ⬜ Dockerized local development setup
-    -   ⬜ Basic Jest tests for API endpoints
+    -   ⬜ Basic Jest tests (menu, cart, auth)
+- Security & Middleware
+	-   ⬜ Helmet for secure headers
+	-   ⬜ Rate limiting on sensitive routes
+	-   ⬜ Input validation/sanitization middleware
+	-   ⬜ CORS configuration
 -   Frontend
     -   ⬜ Menu page
     -   ⬜ Signup page
@@ -39,31 +45,9 @@ A full-stack pizza ordering web app being built with React, Node, Express, and P
 -   Deployment
     -   ⬜ Deploy backend
     -   ⬜ Deploy frontend
-
-### Stretch
-
--   UI/UX polish
--   Improved error handling
--   Expanded menu options
+	-   ⬜ Connect with hosted database
 
 ## API Documentation
-
-### Folder Structure
-
-```
-api/
-├── .env
-├── Dockerfile
-├── schema.sql
-├── seed.sql
-└── src/
-	├── config/
-	├── controllers/
-	├── middlewares/
-	├── models/
-	├── routes/
-	└── index.ts
-```
 
 ### Routes
 
@@ -126,6 +110,7 @@ api/
 		{
 			"id": 1,
 			"cart_id": "123e4567-e89b-12d3-a456-426614174000",
+			"user_id": 1,
 			"menu_item_id": 1,
 			"quantity": 2,
 			"created_at": "2025-06-04T19:00:00.000Z",
@@ -136,7 +121,7 @@ api/
 	]
 	```
 
-- **POST** `/:cartId/item/:menuItemId`
+- **PUT** `/:cartId/item/:menuItemId`
 
 	Updates the quantity of the specified item in the cart.
 
@@ -233,4 +218,65 @@ api/
 			"email": "jane@example.com"
 		}
 	}
+	```
+
+**Checkout** `/checkout`
+
+- **POST** `/`
+
+	Creates a new order for an authenticated user using the specified cart.
+
+	Headers:
+
+	- Authorization: Bearer <JWT\>
+
+	Request:
+
+	```json
+		{
+			"cartId": "123e4567-e89b-12d3-a456-426614174000"
+		}
+	```
+
+	Response:
+
+	```json
+		{
+			"message": "Order 123 placed successfully."
+		}
+	```
+
+**Orders** `/orders`
+
+- **GET** `/`
+
+	Retrieves order history for authenticated user.
+
+	Headers:
+
+	- Authorization: Bearer <JWT\>
+
+	Response:
+
+	```json
+		[
+			{
+				"id": 1,
+				"total_price": "29.97",
+				"created_at": "2025-06-05T15:30:00.000Z",
+				"items": [
+					{
+						"menu_item_id": 1,
+						"quantity": 2,
+						"price": "10.99"
+					},
+					{
+						"menu_item_id": 3,
+						"quantity": 1,
+						"price": "7.99"
+					}
+				]
+			}
+		]
+
 	```
