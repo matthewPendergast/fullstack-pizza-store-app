@@ -68,3 +68,23 @@ export const removeFromCart = async (
         [cartId, menuItemId]
     );
 };
+
+export const mergeCartItems = async (userId: number, cartId: string): Promise<void> => {
+	await pool.query(
+		`
+		INSERT INTO cart_items (user_id, menu_item_id, quantity)
+		SELECT $1, menu_item_id, quantity
+		FROM cart_items
+		WHERE cart_id = $2
+		ON CONFLICT (user_id, menu_item_id)
+		DO UPDATE SET quantity = cart_items.quantity + EXCLUDED.quantity
+		WHERE cart_items.user_id = $1 AND cart_items.menu_item_id = EXCLUDED.menu_item_id;
+		`,
+		[userId, cartId]
+	);
+
+	await pool.query(
+		`DELETE FROM cart_items WHERE cart_id = $1`,
+		[cartId]
+	);
+};

@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { findUserByEmail, createUser } from "../models/userModel";
+import { mergeCartItems } from "../models/cartModel";
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
@@ -36,7 +37,7 @@ export const signup = async (req: Request, res: Response): Promise<void> => {
 };
 
 export const login = async (req: Request, res: Response): Promise<void> => {
-    const { email, password } = req.body;
+    const { email, password, cartId } = req.body;
 
     if (!email || !password) {
         res.status(400).json({ error: "Email and password are required." });
@@ -57,6 +58,14 @@ export const login = async (req: Request, res: Response): Promise<void> => {
         }
 
         const token = jwt.sign({ userId: user.id }, JWT_SECRET, { expiresIn: "1h" });
+
+		if (cartId) {
+			try {
+				await mergeCartItems(user.id, cartId);
+			} catch (err) {
+				console.error("Error merging cart:", err);
+			}
+		}
 
         res.status(200).json({
             message: "Login successful.",
