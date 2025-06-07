@@ -64,7 +64,7 @@ A full-stack pizza ordering web app being built with React, Node, Express, and P
 			"name": "Margherita",
 			"description": "Classic cheese and tomato pizza.",
 			"price": "10.99",
-			"category": "Pizza",
+			"category": "pizza",
 			"created_at": "2025-06-04T18:55:00.000Z"
 		},
 		{
@@ -122,7 +122,7 @@ A full-stack pizza ordering web app being built with React, Node, Express, and P
 			"created_at": "2025-06-04T19:00:00.000Z",
 			"item_name": "Margherita",
 			"item_price": "10.99",
-			"item_category": "Pizza"
+			"item_category": "pizza"
 		}
 	]
 	```
